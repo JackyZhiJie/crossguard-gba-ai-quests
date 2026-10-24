@@ -4,7 +4,7 @@ import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 const js = readFileSync('dist/app.js', 'utf8').replace(/<\/script/gi, '<\\/script');
 const css = existsSync('dist/app.css') ? readFileSync('dist/app.css', 'utf8') : '';
 const html = `<title>GBA AI Quests</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><path d='M32 3 8 12v18c0 15 10 26 24 31 14-5 24-16 24-31V12z' fill='%230f8a6a'/><path d='M14 38q18-14 36 0' fill='none' stroke='%23fff' stroke-width='4' stroke-linecap='round'/><path d='M22 33v9M32 29v13M42 33v9' stroke='%23fff' stroke-width='3.5' stroke-linecap='round'/><circle cx='32' cy='18' r='5' fill='%23ffd23f'/></svg>">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='2 6 60 48'><path d='M14 20 L6 14 M50 20 L58 14' stroke='%230d3b52' stroke-width='3' stroke-linecap='round'/><circle cx='6' cy='14' r='3.4' fill='%23ffcf4a'/><circle cx='58' cy='14' r='3.4' fill='%23ffcf4a'/><rect x='10' y='16' width='44' height='34' rx='16' fill='%23fff' stroke='%230d3b52' stroke-width='3'/><rect x='16' y='22' width='32' height='20' rx='10' fill='%230d3b52'/><path d='M21 33 q3.5 -5 7 0 M36 33 q3.5 -5 7 0' stroke='%235ff2c9' stroke-width='3' fill='none' stroke-linecap='round'/><circle cx='32' cy='12' r='4' fill='%23e04848' stroke='%230d3b52' stroke-width='2.5'/></svg>">
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="A 3D quest game about building, auditing and governing responsible AI across Hong Kong, Macau and the mainland GBA.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
