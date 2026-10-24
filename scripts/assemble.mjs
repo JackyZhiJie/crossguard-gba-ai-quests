@@ -1,5 +1,5 @@
 // Assemble dist/app.js + dist/app.css into one self-contained page (React from cdnjs).
-import { readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync, cpSync } from 'node:fs';
 
 const js = readFileSync('dist/app.js', 'utf8').replace(/<\/script/gi, '<\\/script');
 const css = existsSync('dist/app.css') ? readFileSync('dist/app.css', 'utf8') : '';
@@ -26,6 +26,11 @@ const page = `<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="icon" href="favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0f8a6a">
 ${html.replace('<meta name="claude:viewport-fit-sides" content="cover">\n', '').replace(/<div id="root">[\s\S]*$/, '')}</head>
 <body>
 <div id="root"></div>
@@ -33,4 +38,6 @@ ${html.slice(html.indexOf('<script'))}</body>
 </html>
 `;
 writeFileSync('dist/index.html', page);
+// Icons and manifest for browsers that ignore the inline SVG favicon (e.g. Android Chrome).
+cpSync('public', 'dist', { recursive: true });
 console.log(`dist/index.html  ${(page.length / 1024).toFixed(1)} KB`);
