@@ -1,0 +1,6 @@
+node_modules/
+dist/
+i18n-tools/__pycache__/
+i18n-tools/hant.json
+i18n-tools/chars.json
+.DS_Store
