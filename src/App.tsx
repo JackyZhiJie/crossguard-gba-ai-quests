@@ -226,6 +226,10 @@ export default function App() {
             Guided tour
             <small className="zh">導覽</small>
           </button>
+          <a className="run-btn" href="../console/" title="CrossGuard Operator Console">
+            Run it
+            <small className="zh">運行</small>
+          </a>
           {PAGES.map((p) => (
             <button key={p.id} className={open === p.id ? 'on' : ''} onClick={() => setOpen(p.id)}>
               {p.label}

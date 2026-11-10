@@ -1,10 +1,78 @@
-# GBA AI Quests
+# CrossGuard: responsible AI for GBA border crossings
 
-**A trilingual 3D quest game and working prototype of CrossGuard: responsible AI for cross-border deployment in the Greater Bay Area.**
+**One system, three laws, safer crossings.** Two prototypes of one system, built by Team Bay Builders for the Imperial Global Hackathon Hong Kong & Macau 2026, Challenge 2: Responsible AI.
 
-**▶ Live demo: https://jackyzhijie.github.io/crossguard-gba-ai-quests/**
+| | Live link |
+| --- | --- |
+| Landing page | https://jackyzhijie.github.io/crossguard-gba-ai-quests/ |
+| Run it: CrossGuard Operator Console | https://jackyzhijie.github.io/crossguard-gba-ai-quests/console/ |
+| Learn it: GBA AI Quests | https://jackyzhijie.github.io/crossguard-gba-ai-quests/quests/ |
 
-![GBA AI Quests: the 3D map of the Greater Bay Area with the guided tour open](docs/screenshot.png)
+![CrossGuard Operator Console](site/public/img/console.png)
+
+## Run it / Learn it
+
+| | Run it: Operator Console | Learn it: GBA AI Quests |
+| --- | --- | --- |
+| Who it is for | The operator on duty | Operators, students and the public |
+| What you do | Watch an anonymous crowd at Lok Ma Chau, West Kowloon or the HZMB port; read the 0–100 Crowd Risk Index and its reasons; approve or reject each recommendation | Build CrossGuard yourself on a 3D map of the bay, practise comply once, certify three times, and tune a live privacy filter |
+| Governance you can see | Data boundary, a fire-mode request blocked by design, spoofed-sensor check, audit log for the joint review panel | Testing that sends you back to fix your data, certification by all three jurisdictions |
+| Code | `site/console/` | `src/` |
+
+Both prototypes run the same crowd model: the console imports `src/data/crossguard.ts` from the game, so the two always compute the same Crowd Risk Index.
+
+## What is real and what is simulated
+
+Both prototypes run on simulated crowd data. The Crowd Risk Index is a transparent weighted score of five factors (`src/data/crossguard.ts`). Every score starts at 6 points; the alert is at 70.
+
+| Factor | Up to | Counts fully when |
+| --- | ---: | --- |
+| Crowd density | 36 | 4 people per m² (starts above 0.6) |
+| Arrivals against normal | 24 | 1.65× the normal rate (starts above 0.95×) |
+| 10-minute forecast | 20 | 4 people per m² forecast (starts above 1.2) |
+| Smoke detected | 16 | A smoke detector is active |
+| Exits closed | 14 | Exits are closed by smoke |
+
+Density counts fully at 4 people per m², the UK Green Guide limit for holding areas. The other weights are our assumptions, to be fitted to real data in a pilot. Legal summaries are simplified for teaching, not legal advice. Brand names are illustrative.
+
+## Team Bay Builders
+
+| Member | Affiliation | Role |
+| --- | --- | --- |
+| Jacky | CityU MPhil (Computer Science, HCI) | Prototypes and engineering [confirm] |
+| Billy | PolyU MSc [discipline] | Safeguards, testing and impact [confirm] |
+| Winston | HKU MSc [discipline] | System architecture and pilot plan [confirm] |
+| Thomas | HKU MSc [discipline] | Legal harmonisation and governance [confirm] |
+| Christy | PolyU MSc [discipline] | Problem framing and AI literacy [confirm] |
+
+## Repository structure
+
+```
+site/index.html, site/main.ts   landing page (/), trilingual, plain TypeScript
+site/console/                   operator console (/console/), plain TypeScript
+site/public/                    icons and screenshots for the landing page
+src/                            GBA AI Quests game (/quests/), React + three.js
+src/data/crossguard.ts          the crowd model both prototypes use
+src/theme.css                   colours, fonts and shadows shared by all three pages
+scripts/assemble.mjs            assembles the game page into dist/quests/
+docs/                           technical manual (PDF), screenshot, deck images
+```
+
+## Run locally
+
+```bash
+npm install
+npm run dev        # the game, with hot reload
+npm run dev:site   # the landing page and console, with hot reload
+npm run build      # type-check, then build dist/ (landing, console/, quests/)
+npm run deploy     # build and publish dist/ to the gh-pages branch
+```
+
+Pushing to `main` also builds and publishes the site through `.github/workflows/deploy.yml`. Everything is static: no backend, no accounts, and progress stays in the browser.
+
+---
+
+# GBA AI Quests (the game)
 
 ## What it is
 
@@ -22,32 +90,6 @@ GBA AI Quests turns each part of the proposal into a quest on a 3D map:
 | Three Seals Island | HZMB | Comply once, certify three times: turn the strictest rule into one common control |
 
 Points from quests, courses and open-source projects unlock gated rewards such as API credits, compute and incubation. A guided tour walks through the proposal, and an educator guide turns it into a 55-minute lesson. The whole interface switches between **English, Traditional Chinese and Simplified Chinese**.
-
-## Run locally
-
-```bash
-npm install
-npm run dev        # dev server with hot reload
-npm run build      # type-check, build with Vite, and assemble the page in dist/
-```
-
-Built with TypeScript, React 18, three.js and Vite. There is no backend: progress stays in the browser's local storage.
-
-**Deployment.** Every push to `main` runs `.github/workflows/deploy.yml`: GitHub Actions installs dependencies, builds the TypeScript source and publishes `dist/` to the `gh-pages` branch, which GitHub Pages serves.
-
-## Project structure
-
-```
-src/App.tsx        shell: 3D stage, quest log, hubs, guided tour, routing
-src/world/         procedural three.js map of the Greater Bay Area
-src/quests/        Golden Week Surge and Three Seals Island
-src/pages/         Border Gate, Academy, Filter Forge, Harbour, Exchange, Hall of Fame, Educator guide
-src/data/          content and models: filter engine, crowd-risk model, Trust Score, rewards
-src/i18n/          language layer and generated EN / 繁 / 简 dictionaries
-i18n-tools/        translation tables and the generator script
-docs/              technical manual (PDF) and screenshot
-.github/workflows/ build-and-deploy workflow for GitHub Pages
-```
 
 ## Documentation
 

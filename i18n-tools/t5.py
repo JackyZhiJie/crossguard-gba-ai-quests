@@ -81,4 +81,7 @@ EXTRA = {
     "The proposal in brief": "提案摘要",
     "Responsible AI · Hong Kong · Macau · Mainland GBA": "負責任 AI · 香港 · 澳門 · 大灣區內地",
     "Our answer covers design, build, audit and governance in one loop": "我們的方案以一個循環涵蓋設計、構建、審計及治理",
+    "Watch it run: CrossGuard console": "觀看實際運作：CrossGuard 控制台",
+    "Run it": "運行",
+    "Open the operator console": "打開操作員控制台",
 }

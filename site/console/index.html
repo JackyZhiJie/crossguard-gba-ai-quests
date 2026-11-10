@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CrossGuard Operator Console</title>
+<meta name="description" content="What a border-crossing operator sees: an explainable Crowd Risk Index, recommendations a person approves, and an audit log. Simulated data.">
+<link rel="icon" href="../favicon.ico" sizes="48x48">
+<link rel="icon" type="image/svg+xml" href="../icon.svg">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta name="theme-color" content="#0f8a6a">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700&display=swap">
+<script type="module" src="./console.ts"></script>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <nav class="crumbs"><a href="../">← CrossGuard home</a><a href="../quests/#surge">Learn it in GBA AI Quests →</a></nav>
+      <span class="proto">● Prototype · simulated crowd data</span>
+      <h1>CrossGuard Operator Console</h1>
+      <p>What a crossing operator sees: a 0–100 Crowd Risk Index with its reasons, recommendations a person approves or rejects, and a record of every decision for the joint review panel.</p>
+    </div>
+    <div class="controls">
+      <div class="field"><label for="crossing">Crossing</label><select id="crossing"></select></div>
+      <div class="field"><label for="scenario">Scenario</label><select id="scenario"></select></div>
+      <button class="btn primary" id="play" type="button">Pause</button>
+      <button class="btn" id="speed" type="button">Speed ×1</button>
+      <button class="btn" id="reset" type="button">Restart</button>
+      <div class="clock" id="clock" aria-live="off">17:00</div>
+    </div>
+  </header>
+
+  <section class="grid3">
+    <div class="panel">
+      <div class="panel-head"><h2>Crowd Risk Index</h2><span class="small mono" id="zoneName">B2 concourse</span></div>
+      <div class="cri">
+        <div class="cri-num" id="criNum">0</div>
+        <div class="band" id="band"><span class="dot"></span><span id="bandText">Normal</span></div>
+      </div>
+      <div class="meter" id="meter" aria-hidden="true"><span id="meterFill" style="width:0%"></span><i title="Alert at 70"></i></div>
+      <div>
+        <h2 style="margin-bottom:8px">Why this score</h2>
+        <ul class="factors" id="factors"></ul>
+      </div>
+      <dl class="kv">
+        <dt>Arrivals / min</dt><dd class="tnum" id="kvArr">0</dd>
+        <dt>Gate throughput / min</dt><dd class="tnum" id="kvThr">0</dd>
+        <dt>Waiting in concourse</dt><dd class="tnum" id="kvQ">0</dd>
+      </dl>
+    </div>
+
+    <div class="mid">
+    <div class="panel">
+      <div class="panel-head"><h2>Camera view</h2><span class="small">Anonymous counts only: each dot is one person</span></div>
+      <div class="cam-frame">
+        <canvas id="crowd" width="720" height="300" role="img" aria-label="Animated top-down view of travellers walking to the e-gates"></canvas>
+        <span class="cam-badge" id="camBadge"><i></i><span id="camName">CAM 04 · B2 CONCOURSE</span></span>
+      </div>
+      <div class="cam-read">
+        <span>Crowding: <b id="camDens">0.0</b> people/m²</span>
+        <span>E-gate lanes open: <b id="camGates">8 of 8</b></span>
+        <span class="small"><i class="dotkey" style="background:var(--ok)"></i>room to move <i class="dotkey" style="background:var(--warn);margin-left:8px"></i>tight <i class="dotkey" style="background:var(--crit);margin-left:8px"></i>packed</span>
+      </div>
+    </div>
+    <div class="panel chart-panel">
+      <div class="panel-head"><h2>Risk over the evening</h2><span class="small" id="scenarioText"></span></div>
+      <div class="legend">
+        <span><i class="sw"></i>With operator decisions</span>
+        <span><i class="sw dash"></i>If nobody acts</span>
+        <span><i class="sw alert"></i>CrossGuard alert (70)</span>
+        <span><i class="sw manual"></i>Visible on CCTV (3.5 people/m²)</span>
+      </div>
+      <div class="chart-wrap"><svg class="chart" id="chart" viewBox="0 0 720 300" role="img" aria-label="Crowd Risk Index over time"></svg></div>
+      <div class="lead" id="lead"></div>
+    </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><h2>Recommendations</h2><span class="small">A person decides</span></div>
+      <div class="recs" id="recs"></div>
+      <div class="notice" id="notice" hidden></div>
+    </div>
+  </section>
+
+  <section class="grid-gov">
+    <div class="panel">
+      <div class="panel-head"><h2>Data boundary</h2><span class="small">Federated: data stays home</span></div>
+      <div class="boundary">
+        <div class="side"><h3 id="sideA">Hong Kong side</h3><ul>
+          <li>Camera frames counted on site: <span class="tnum" id="bFrames">0</span></li>
+          <li>Frames sent off site: <b class="tnum">0</b></li>
+          <li>Local model trained on local data</li></ul></div>
+        <div class="pipe"><span class="arrow">⇄</span><span>Shared every 15 min</span><span class="tnum" id="bUpdates">0 updates</span><span>model parameters + risk index only</span></div>
+        <div class="side"><h3 id="sideB">Shenzhen side</h3><ul>
+          <li>Receives risk index and release requests</li>
+          <li>Trains its own model locally</li>
+          <li>Sends back parameters, never data</li></ul></div>
+      </div>
+      <p class="never"><b>Never collected or shared:</b> faces, names, ID or passport numbers, nationality.</p>
+      <h2>Common controls, checked live</h2>
+      <div class="controls-list" id="ctrls"></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><h2>Audit log</h2><span class="small">For the joint review panel of all three jurisdictions</span></div>
+      <div class="log-wrap"><table>
+        <thead><tr><th>Time</th><th>Risk</th><th>Recommendation</th><th>Reason shown</th><th>Decision</th></tr></thead>
+        <tbody id="log"></tbody>
+      </table></div>
+      <div class="copy-row">
+        <button class="btn" id="copyLog" type="button">Copy log as JSON</button>
+        <span class="small" id="copyMsg" aria-live="polite"></span>
+      </div>
+      <textarea id="copyFallback" hidden readonly style="width:100%;height:90px;background:var(--panel-2);color:var(--fg);border:1px solid var(--line);border-radius:8px;font-family:var(--font-mono);font-size:11px"></textarea>
+    </div>
+  </section>
+
+  <p class="foot">Simulated data. The crowd model, scenarios and recommendations are the same ones in the GBA AI Quests code (<span class="mono">src/data/crossguard.ts</span>). The prototype risk index is a transparent weighted score of five factors; the pilot would use a trained model with the same factor-level explanations. “Visible on CCTV” is a modelled threshold for when crowding becomes obvious to a person watching screens, not measured data. Legal mappings are simplified. Code: <a href="https://github.com/JackyZhiJie/crossguard-gba-ai-quests" target="_blank" rel="noopener">github.com/JackyZhiJie/crossguard-gba-ai-quests</a></p>
+</div>
+
+</body>
+</html>

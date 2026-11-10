@@ -437,9 +437,14 @@ export default function Surge({ onDone }: { onDone: () => void }) {
               />
             </label>
           ))}
-          <button className="btn primary" onClick={onDone}>
-            Back to the map
-          </button>
+          <div className="cta-row">
+            <a className="btn" href="../console/">
+              Watch it run: CrossGuard console
+            </a>
+            <button className="btn primary" onClick={onDone}>
+              Back to the map
+            </button>
+          </div>
         </section>
       )}
     </div>

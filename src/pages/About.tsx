@@ -19,6 +19,9 @@ export default function About({ onTour }: { onTour?: () => void }) {
             Start the guided tour
           </button>
         )}
+        <a className="btn" href="../console/">
+          Open the operator console
+        </a>
       </div>
       <p className="muted small">The guided tour walks through the proposal and flies to the quest that demonstrates each point.</p>
 

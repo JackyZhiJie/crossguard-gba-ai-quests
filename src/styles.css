@@ -1,38 +1,6 @@
 /* Layout: sticky checkpoint-signage header with a tab rail; each view is a 1180px column of panels on a cool harbour-grey ground. */
 /* Layout: a full-screen 3D bay is the home screen; HUD floats on top; quests and hubs open as scrolling sheets over the map. Single daytime game look. */
-:root {
-  --bg: #eaf6f8;
-  --surface: #ffffff;
-  --surface-2: #f2f8fa;
-  --ink: #0d2b3e;
-  --muted: #557080;
-  --line: #d3e4ea;
-  --accent: #0f8a6a;
-  --accent-ink: #ffffff;
-  --accent-soft: #daf3ea;
-  --gold: #a26800;
-  --gold-soft: #fff1cc;
-  --s1: #2a78d6;
-  --s2: #eb6834;
-  --s3: #1baf7a;
-  --good: #0ca30c;
-  --warning: #fab219;
-  --critical: #d03b3b;
-  --good-ink: #157a15;
-  --warn-ink: #8a5900;
-  --crit-ink: #b42323;
-  --info-ink: #1d5ea8;
-  --sky-top: #8fd3ec;
-  --sky-bottom: #e9f8f4;
-  --shadow: 0 2px 4px rgba(13, 43, 62, 0.06), 0 10px 30px rgba(13, 43, 62, 0.12);
-  --font-display: 'Fredoka', 'Nunito', var(--font-cjk), 'Trebuchet MS', system-ui, sans-serif;
-  --font-cjk: 'Noto Sans TC';
-  --font-body: 'Nunito', var(--font-cjk), system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  --font-zh: 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', sans-serif;
-  --r: 14px;
-  color-scheme: light;
-}
+@import './theme.css';
 * { box-sizing: border-box; }
 html, body { background: var(--bg); }
 body {
@@ -857,6 +825,7 @@ body { overflow: hidden; background: var(--sky-bottom); }
 .finale { text-align: center; display: grid; justify-items: center; gap: 6px; }
 .finale .field { width: 100%; max-width: 640px; text-align: left; }
 .finale .mentor { text-align: left; }
+.finale .cta-row { justify-content: center; }
 .badge-big { width: 150px; height: 150px; border-radius: 50%; display: grid; place-content: center; text-align: center; background: radial-gradient(circle at 35% 30%, #ffe48a, #f2b632 60%, #c98a00); color: #5a3b00; box-shadow: 0 0 0 6px #fff, 0 0 0 9px #f2b632, var(--shadow); animation: pop 0.5s cubic-bezier(0.2, 1.6, 0.4, 1); margin: 10px 0; }
 .badge-big span { font-family: var(--font-display); font-weight: 700; font-size: 19px; line-height: 1.05; padding: 0 12px; }
 .badge-big small { font-family: var(--font-zh); font-size: 12px; }
@@ -968,6 +937,10 @@ body[data-lang^='zh'] .kicker, body[data-lang^='zh'] .h4, body[data-lang^='zh'] 
 .tour-dots button { width: 8px; height: 8px; border-radius: 50%; border: 0; padding: 0; background: var(--line); }
 .tour-dots button.past { background: color-mix(in srgb, var(--accent) 45%, var(--line)); }
 .tour-dots button.on { background: var(--accent); width: 20px; border-radius: 999px; }
+.hud-nav .run-btn { border-radius: 999px; padding: 6px 14px; font-family: var(--font-display); font-weight: 600; font-size: 14px; color: var(--ink); display: grid; line-height: 1.1; white-space: nowrap; text-decoration: none; }
+.hud-nav .run-btn small { font-family: var(--font-zh); font-size: 10px; color: var(--muted); font-weight: 500; }
+.hud-nav .run-btn:hover { background: var(--ink); color: #fff; }
+.hud-nav .run-btn:hover small { color: rgba(255, 255, 255, 0.75); }
 .hud-nav .tour-btn { background: var(--accent); color: #fff; }
 .hud-nav .tour-btn small { color: rgba(255, 255, 255, 0.8); }
 .hud-nav .tour-btn.on, .hud-nav .tour-btn:hover { background: var(--ink); }
