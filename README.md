@@ -8,9 +8,8 @@
 | Run it: CrossGuard Operator Console | https://jackyzhijie.github.io/crossguard-gba-ai-quests/console/ |
 | Learn it: GBA AI Quests | https://jackyzhijie.github.io/crossguard-gba-ai-quests/quests/ |
 
-![CrossGuard Operator Console](site/public/img/console.png)
+![CrossGuard Console & AI Quests](site/public/img/og.png)
 
-## Run it / Learn it
 
 | | Run it: Operator Console | Learn it: GBA AI Quests |
 | --- | --- | --- |
