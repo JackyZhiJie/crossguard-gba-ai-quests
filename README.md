@@ -1,14 +1,16 @@
 # CrossGuard: responsible AI for GBA border crossings
 
 **One system, three laws, safer crossings.** Two prototypes of one system, built by Team Bay Builders for the Imperial Global Hackathon Hong Kong & Macau 2026, Challenge 2: Responsible AI.
-
+![CrossGuard Console & AI Quests](site/public/img/og.png)
 | | Live link |
 | --- | --- |
 | Landing page | https://jackyzhijie.github.io/crossguard-gba-ai-quests/ |
 | Run it: CrossGuard Operator Console | https://jackyzhijie.github.io/crossguard-gba-ai-quests/console/ |
 | Learn it: GBA AI Quests | https://jackyzhijie.github.io/crossguard-gba-ai-quests/quests/ |
 
-![CrossGuard Console & AI Quests](site/public/img/og.png)
+
+## Landing page
+![CrossGuard Landing Page](site/public/img/LandingPage.png)
 
 
 | | Run it: Operator Console | Learn it: GBA AI Quests |
