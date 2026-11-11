@@ -65,7 +65,6 @@ th { color: var(--muted); font-weight: 700; }
 .member b { font-size: 1.15rem; }
 .member span { color: var(--muted); font-size: 0.9rem; }
 .member em { font-style: normal; font-weight: 600; }
-.todo { font-style: normal; font-size: 0.8rem; color: var(--warn-ink); }
 
 .foot { max-width: 1120px; margin: 56px auto 0; padding: 20px 16px 40px; border-top: 1px solid var(--line); color: var(--muted); }
 .foot p { margin: 0 0 6px; }
