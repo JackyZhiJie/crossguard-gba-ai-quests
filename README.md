@@ -40,7 +40,7 @@ Density counts fully at 4 people per m², the UK Green Guide limit for holding a
 
 | Member | Affiliation | Role |
 | --- | --- | --- |
-| Jacky | CityU MPhil (Computer Science, HCI) | MVP: prototypes and engineering |
+| Jacky | CityU MPhil (Computer Science) | MVP: prototypes and engineering |
 | Billy | PolyU MSc (Building Services Engineering) | Core idea and crowd-risk model |
 | Winston | HKU MSc (Electrical & Electronic Engineering) | System architecture and pilot plan |
 | Thomas | HKU MSc (Energy Engineering) | Legal harmonisation and governance |
